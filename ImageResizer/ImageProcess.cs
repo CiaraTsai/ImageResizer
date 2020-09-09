@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -111,9 +113,11 @@ namespace ImageResizer
         #region Async
         public async Task ResizeImagesAsync(string sourcePath, string destPath, double scale)
         {
+            
             var allFiles = FindImages(sourcePath);
 
             Task[] taskArray = new Task[allFiles.Count];
+
             int index = 0;
             foreach (var filePath in allFiles)
             {
@@ -129,7 +133,6 @@ namespace ImageResizer
                     int destionatonWidth = (int)(sourceWidth * scale);
                     int destionatonHeight = (int)(sourceHeight * scale);
 
-                    Console.WriteLine($"[{Thread.CurrentThread.ManagedThreadId}]");
                     var processedImage = await processBitmapAsync((Bitmap)imgPhoto,
                             sourceWidth, sourceHeight,
                             destionatonWidth, destionatonHeight);
@@ -157,9 +160,10 @@ namespace ImageResizer
                     new Rectangle(0, 0, newWidth, newHeight),
                     new Rectangle(0, 0, srcWidth, srcHeight),
                     GraphicsUnit.Pixel);
+
             });
 
-            return await Task.FromResult(resizedbitmap);
+            return resizedbitmap;
         }
         #endregion
     }

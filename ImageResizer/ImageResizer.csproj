@@ -53,6 +53,7 @@
     <None Include="images\__credits.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\4o2vwgYTMkM.jpg">
