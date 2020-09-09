@@ -33,7 +33,7 @@ namespace ImageResizer
             
             double newts = sw.Elapsed.TotalMilliseconds;
             Console.WriteLine($"Async Times: {newts} ms");
-            Console.WriteLine($"Time Rate Improvement: {((oldts - newts) / oldts) * 100} %");
+            Console.WriteLine($"Time Rate Improvement: {Math.Round(((oldts - newts) / oldts) * 100, 0)} %");
             
            
             Console.ReadKey();

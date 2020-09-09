@@ -126,6 +126,7 @@ namespace ImageResizer
                     Image imgPhoto = Image.FromFile(filePath);
 
                     string imgName = Path.GetFileNameWithoutExtension(filePath);
+                    string destFile = Path.Combine(destPath, imgName + ".jpg");
 
                     int sourceWidth = imgPhoto.Width;
                     int sourceHeight = imgPhoto.Height;
@@ -136,10 +137,8 @@ namespace ImageResizer
                     var processedImage = await processBitmapAsync((Bitmap)imgPhoto,
                             sourceWidth, sourceHeight,
                             destionatonWidth, destionatonHeight);
-                    
-                    string destFile = Path.Combine(destPath, imgName + ".jpg");
 
-                    processedImage.Save(destFile, ImageFormat.Jpeg);
+                    await Task.Run(() => { processedImage.Save(destFile, ImageFormat.Jpeg); });
                 });
                 index++;
             }
